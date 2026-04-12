@@ -525,7 +525,7 @@ function drawToolpath() {
 
         ctx.lineWidth = 2;
         ctx.moveTo(sX, sZ);
-        
+
         if (b.g2 || b.g3) {
             let dx = tX - sX;
             let dy = tZ - sZ;
@@ -534,21 +534,21 @@ function drawToolpath() {
 
             if (dist > 0) {
                 if (rScale < dist / 2) rScale = dist / 2;
-                
+
                 let midX = (sX + tX) / 2;
                 let midY = (sZ + tZ) / 2;
                 let h = Math.sqrt(rScale * rScale - (dist / 2) * (dist / 2));
-                
+
                 let nx = -dy / dist;
                 let ny = dx / dist;
-                
+
                 let sign = b.g3 ? -1 : 1;
                 let cX = midX + sign * h * nx;
                 let cY = midY + sign * h * ny;
-                
+
                 let startAngle = Math.atan2(sZ - cY, sX - cX);
                 let endAngle = Math.atan2(tZ - cY, tX - cX);
-                
+
                 ctx.arc(cX, cY, rScale, startAngle, endAngle, b.g3 ? true : false);
             } else {
                 ctx.lineTo(tX, tZ);
@@ -556,7 +556,7 @@ function drawToolpath() {
         } else {
             ctx.lineTo(tX, tZ);
         }
-        
+
         ctx.stroke();
 
         curX = targetX;
@@ -769,7 +769,7 @@ async function applyCommand() {
         if (targetStep >= 0 && targetStep < STEPS.length) {
             elInput.value = "";
             await printLog(`> SKOK DO BLOKU N${nValue}`, "log-user");
-            
+
             gameState.step = targetStep;
             gameState.blocks = [];
             // Doplnění historie drah pro vizualizaci plátna, jako by to uživatel prošel
@@ -778,10 +778,10 @@ async function applyCommand() {
                 let cmdWithN = prevCmd.includes('N') ? prevCmd : `N${(i + 1) * 10} ${prevCmd}`;
                 gameState.blocks.push(parseCommand(cmdWithN));
             }
-            
+
             drawToolpath();
             updateUI();
-            
+
             await printLog(`[SYSTÉM]: Skok proveden. Systém úspěšně inicializován do stavu N${nValue}.`, "log-success", true);
             startStep();
             return;
@@ -874,7 +874,7 @@ function downloadPDF() {
     }
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    
+
     function formatStr(str) {
         return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/–/g, '-') : "";
     }
@@ -882,11 +882,11 @@ function downloadPDF() {
     doc.setFont("courier", "bold");
     doc.setFontSize(16);
     doc.text(formatStr("MASTER PROGRAM - VYSLEDEK SIMULACE"), 20, 20);
-    
+
     doc.setFont("courier", "normal");
     doc.setFontSize(10);
     doc.text(formatStr("Kompletni a spravne vygenerovany NC kod:"), 20, 30);
-    
+
     const pdfData = [
         { c: 'N10 WORKPIECE', e: 'definice velikosti obrobku' },
         { c: 'N20 G90 G54', e: 'absolutni odmerovani, aktivace nuloveho bodu obrobku W' },
@@ -939,7 +939,7 @@ function downloadPDF() {
     ];
 
     let y = 40;
-    
+
     for (let row of pdfData) {
         if (y > 275) {
             doc.addPage();
@@ -957,18 +957,18 @@ function downloadPDF() {
         } else if (row.c) {
             let fullLine = row.c + (row.e ? " - " + row.e : "");
             doc.setFont("courier", "normal");
-            
+
             // Highlight the code block as bold for better readability, and normal for explanation
             // Using standard uniform text here just for simplicity, but it's clean and safe
             let wrapped = doc.splitTextToSize(fullLine, 170);
             doc.text(wrapped, 20, y);
-            
+
             y += (wrapped.length * 5) + 1;
         } else {
             y += 4;
         }
     }
-    
+
     doc.save("NC_Program_Axel.pdf");
 }
 
