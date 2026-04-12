@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNC Záchrana: Mechanik Seřizovač</title>
+    <meta name="description" content="Textová G-Code adventura pro studenty." />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="sys-header glass">
+            <h1 class="logo">SYS // NC-OPERATOR</h1>
+            <div class="status-panel">
+                <div class="status-item">
+                    <button id="btn-music" class="cyber-btn" style="padding: 5px 15px; font-size: 0.8rem; width: 100%;">🔊 HUDBA</button>
+                    <select id="music-selector" class="cyber-select" style="margin-top: 5px; width: 100%; font-size: 0.7rem; padding: 2px;">
+                        <option value="audio/na_hrane_levelu.mp3">Na hraně levelu (Výchozí)</option>
+                        <option value="default">Ambient (Záloha)</option>
+                        <option value="audio/nocni_stin.mp3">Noční stín</option>
+                        <option value="audio/Vysoce_napjata_hra.mp3">Vysoce napjatá hra</option>
+                    </select>
+                </div>
+                <div class="status-item">
+                    <span class="label">SOUŘADNICE:</span>
+                    <span class="value" id="ui-coords">X0.00 Z0.00</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">SKÓRE:</span>
+                    <span class="value txt-green" id="ui-score">0000</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">ŽIVOTY:</span>
+                    <span class="value hearts" id="ui-lives">❤❤❤</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- TERMINAL SECTION -->
+            <main class="terminal glass">
+                <div class="history-log" id="history-log">
+                    <!-- Text responses will appear here -->
+                </div>
+                
+                <div class="input-area">
+                    <span class="prompt-symbol" id="n-prefix" style="margin-right: 8px;">N10</span>
+                    <input type="text" id="command-input" autocomplete="off" spellcheck="false" placeholder="Napište zbylý kód bloku...">
+                    <button id="btn-submit" class="cyber-btn">APLIKOVAT</button>
+                </div>
+            </main>
+
+            <!-- SIDEBAR: MAPA -->
+            <aside class="sidebar glass">
+                <h2>SYNCHRONIZACE: ODESÍLATEL ↔ STROJ</h2>
+                <div class="canvas-container" style="flex: 1; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.5); border-radius: 8px;">
+                    <canvas id="toolpath-map" width="400" height="400" style="max-width: 100%; max-height: 100%;"></canvas>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <!-- TERMINAL TEST OVERLAY -->
+    <div id="terminal-test">
+        <div id="terminal-test-text"></div>
+        <div class="terminal-test-input-area">
+            <span class="prompt-symbol">></span>
+            <input type="text" id="terminal-test-input" autocomplete="off" spellcheck="false" maxlength="1" placeholder="A/B/C">
+        </div>
+    </div>
+    
+    <!-- VICTORY SCREEN OVERLAY -->
+    <div id="victory-banner" class="victory-overlay">
+        <h1>PROGRAM KOMPLETNÍ</h1>
+        <p>Master Program Dr. Axela byl s absolutní nulovou chybovostí vyroben.</p>
+        <button onclick="downloadPDF()" class="cyber-btn" style="margin-top: 30px; margin-right: 15px; font-size: 1.2rem; padding: 15px 30px; background: rgba(56, 189, 248, 0.2); border-color: #38bdf8;">📥 Stáhnout program (PDF)</button>
+        <button onclick="location.reload()" class="cyber-btn" style="margin-top: 30px; font-size: 1.2rem; padding: 15px 30px;">Zahájit další směnu</button>
+    </div>
+
+    <!-- GAME OVER SCREEN OVERLAY -->
+    <div id="gameover-banner" class="victory-overlay gameover">
+        <h1>FATAL ERROR</h1>
+        <p id="gameover-text" style="max-width: 800px; line-height: 1.6;"></p>
+        <button onclick="location.reload()" class="cyber-btn" style="margin-top: 30px; font-size: 1.2rem; padding: 15px 30px; border-color: var(--accent-red); color: var(--accent-red);">Zkusit to znovu od nuly</button>
+    </div>
+    
+    <!-- AUDIO ELEMENT -->
+    <audio id="bg-music" loop>
+        <source src="audio/na_hrane_levelu.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
