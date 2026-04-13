@@ -17,8 +17,8 @@
                 <div class="status-item">
                     <button id="btn-music" class="cyber-btn" style="padding: 5px 15px; font-size: 0.8rem; width: 100%;">🔊 HUDBA</button>
                     <select id="music-selector" class="cyber-select" style="margin-top: 5px; width: 100%; font-size: 0.7rem; padding: 2px;">
-                        <option value="audio/na_hrane_levelu.mp3">Na hraně levelu (Výchozí)</option>
-                        <option value="default">Ambient (Záloha)</option>
+                        <option value="audio/na_hrane_levelu.mp3">Na hraně levelu</option>
+                        <option value="default">Ambient</option>
                         <option value="audio/nocni_stin.mp3">Noční stín</option>
                         <option value="audio/Vysoce_napjata_hra.mp3">Vysoce napjatá hra</option>
                     </select>
@@ -71,6 +71,26 @@
         </div>
     </div>
     
+    <!-- INTRO SCREEN OVERLAY -->
+    <div id="intro-banner" class="victory-overlay" style="display: flex;">
+        <h1 style="font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 5px;">CNC ZÁCHRANA</h1>
+        <h2 style="color: var(--accent-cyan); font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 20px; letter-spacing: 2px;">MECHANIK SEŘIZOVAČ</h2>
+        
+        <p style="max-width: 800px; font-size: 0.95rem; margin: 0 auto 15px; line-height: 1.5; text-align: justify; padding: 0 20px;">
+            <strong style="color: var(--accent-purple);">PŘÍBĚH:</strong><br>
+            Píše se rok 2084. Jsi elitní mechanik-seřizovač v přísně tajné továrně Dr. Axela. Systém řízení výroby zkolaboval a hrozí, že automatická linka na výrobu kritických komponent exploduje. Tvou jedinou šancí je převzít manuální kontrolu nad terminálem v režimu G-kódu a krok za krokem přeprogramovat stroj na záchranný cyklus dříve, než dojde k havárii celého komplexu!
+        </p>
+        
+        <div style="max-width: 840px; font-size: 0.95rem; margin: 0 auto 25px; line-height: 1.5; text-align: left; padding: 0 20px; color: var(--text-main); font-family: var(--font-mono);">
+            <strong style="color: var(--accent-yellow);">PRAVIDLA HRY:</strong><br>
+            <span style="color: var(--accent-green);">[+]</span> Postupuj podle pokynů a zadávej správné NC bloky do terminálu.<br>
+            <span style="color: var(--accent-red);">[-]</span> Systém neodpouští! Za každý chybný příkaz ztrácíš 10 bodů a 1 život.<br>
+            <span style="color: var(--accent-red);">[!]</span> Pokud klesnou životy na nulu, čeká tě teoretická prověrka (Záchranný protokol).
+        </div>
+        
+        <button id="btn-start-shift" class="cyber-btn" style="font-size: 1.2rem; padding: 12px 35px; border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);">ZAHÁJIT SMĚNU</button>
+    </div>
+
     <!-- VICTORY SCREEN OVERLAY -->
     <div id="victory-banner" class="victory-overlay">
         <h1>PROGRAM KOMPLETNÍ</h1>

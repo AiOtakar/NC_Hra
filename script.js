@@ -1045,8 +1045,19 @@ const startAudioOnInteraction = () => {
 document.addEventListener('click', startAudioOnInteraction);
 document.addEventListener('keydown', startAudioOnInteraction);
 
+let gameStarted = false;
+
+document.getElementById('btn-start-shift').addEventListener('click', () => {
+    document.getElementById('intro-banner').style.display = 'none';
+    if (!gameStarted) {
+        gameStarted = true;
+        startStep();
+        if (!musicPlaying) toggleMusic(true);
+    }
+});
+
 window.onload = () => {
     updateUI();
     drawToolpath();
-    startStep();
+    // startStep() se spustí až po kliknutí na tlačítko ZAHÁJIT SMĚNU
 };
